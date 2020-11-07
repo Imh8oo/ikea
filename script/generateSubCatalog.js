@@ -1,5 +1,3 @@
-'use strict';
-
 const generateSubCatalog = () => {
   const subCatalog = `
     <div class="subcatalog">
@@ -22,10 +20,10 @@ const generateSubCatalog = () => {
         <li class="subcatalog-list__item">
         <a href="goods.html?subcat=Стулья для письменного стола">Стулья для письменного стола</a></li>
       </ul>
-    /div>
+    </div>
   `;
 
   document.body.insertAdjacentHTML('beforeend', subCatalog);
 }
 
-generateSubCatalog();
+export default generateSubCatalog;
