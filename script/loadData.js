@@ -39,10 +39,6 @@ const loadData = () => {
   if (location.pathname.includes('cart')) {
     getData.getCartItems(cartlist, (cartItems) => console.log(cartItems))
   }
-
-  getData.getAllCategories( (categories) => console.log('categories: ', categories) );
-  
-  getData.getAllSubcategories('мебель', (subcategories) => console.log('subcategories: ', subcategories) )
 }
 
 export default loadData;

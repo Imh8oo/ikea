@@ -1,11 +1,12 @@
-export const catalog = () => {
+import { generateSubCatalogList } from './generateSubCatalog.js';
+
+export const activateCatalog = () => {
   const openCatalogBtn = document.querySelector('.btn-burger'),
       catalog = document.querySelector('.catalog'),
       closeCatalogBtn = document.querySelector('.btn-close'),
       catalogList =  document.querySelector('.catalog-list'),
-      subCatalog =  document.querySelector('.subcatalog'),
-      closeSubCatalogBtn = document.querySelector('.btn-return'),
-      subCatalogHeader = subCatalog.querySelector('.subcatalog-header');
+      subCatalog = document.querySelector('.subcatalog'),
+      closeSubCatalogBtn = document.querySelector('.btn-return');
 
   const overlay = document.createElement('div');
   overlay.classList.add('overlay');
@@ -34,17 +35,18 @@ export const catalog = () => {
 
   const openSubCatalog = (e) => {
     e.preventDefault();
-    const target = e.target.closest('li');
-    if (target) {
-      subCatalogHeader.innerHTML = target.innerHTML;
+    if (e.target.closest('li')) {
+      generateSubCatalogList(subCatalog, e.target.textContent);
+      closeSubCatalogBtn.addEventListener('click', closeSubCatalog);
+      document.addEventListener('keyup', escapeSubCatalog);
+      document.removeEventListener('keyup', escapeCatalog);
       subCatalog.classList.add('subopen');
     }
-    document.addEventListener('keyup', escapeSubCatalog);
-    document.removeEventListener('keyup', escapeCatalog);
   }
 
   const closeSubCatalog = () => {
     subCatalog.classList.remove('subopen');
+    closeSubCatalogBtn.removeEventListener('click', closeSubCatalog);
     document.removeEventListener('keyup', escapeSubCatalog);
     document.addEventListener('keyup', escapeCatalog);
   }
@@ -60,6 +62,5 @@ export const catalog = () => {
   closeCatalogBtn.addEventListener('click', closeCatalog);
   overlay.addEventListener('click', closeCatalog);
   catalogList.addEventListener('click', openSubCatalog);
-  closeSubCatalogBtn.addEventListener('click', closeSubCatalog);
   console.log(document.location)
 }
