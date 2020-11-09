@@ -1,12 +1,12 @@
-const PARAM = {
-  cat: 'category',
-  subcat: 'subcategory',
-  search: ['name', 'description', 'category', 'subcategory'],
-};
-
 export default class GetData {
   constructor() {
     this.URL = 'database/dataBase.json';
+  }
+
+  _PARAM = {
+    cat: 'category',
+    subcat: 'subcategory',
+    search: ['name', 'description', 'category', 'subcategory'],
   }
 
   _get = (handler) => {
@@ -22,6 +22,8 @@ export default class GetData {
         const item = data.find( dbItem => itemId === dbItem.id);
         if (item) {
           callback(item);
+        } else {
+          //NOTHING FOUND
         }
       });
     } else {
@@ -29,20 +31,19 @@ export default class GetData {
     }
   }
 
-  getItemByName = (itemName, callback) => {
+  getItemsByName = (itemName, callback) => {
     if (typeof(itemName) === 'string') {
       this._get( data => {
-        const item = data.filter( dbItem => {
+        const items = data.filter( dbItem => {
           for (const prop in dbItem) {
-            if (PARAM.search.includes(prop)
+            if (this._PARAM.search.includes(prop)
               && dbItem[prop].toLowerCase().includes(itemName.toLowerCase())) {
               return true;
             }
           }
         });
-        if (item) {
-          callback(item);
-        }
+        console.log(Array.isArray(items));
+        callback(items);
       });
     } else {
       throw new Error('The "itemName" must be a string');
@@ -53,9 +54,8 @@ export default class GetData {
     if (Array.isArray(wishlistIds) || typeof(wishlistIds) === 'string') {
       this._get( data => {
         const wishlistItems = data.filter( dbItem => wishlistIds.includes(dbItem.id));
-        if (wishlistItems.length) {
-          callback(wishlistItems);
-        }
+        console.log(Array.isArray(wishlistItems));
+        callback(wishlistItems);
       });
     } else {
       throw new Error('The "wishlistIds" must be an array or a string');
@@ -66,9 +66,8 @@ export default class GetData {
     if (Array.isArray(cartItemsIds)) {
       this._get( data => {
         const cartItems = data.filter( dbItem => cartItemsIds.some( obj => obj.id === dbItem.id) );
-        if (cartItems.length) {
-          callback(cartItems);
-        }
+        console.log(Array.isArray(cartItems));
+        callback(cartItems);
       });
     } else {
       throw new Error('The "cartItemsList" must be an array');
@@ -79,10 +78,9 @@ export default class GetData {
     if (typeof(prop) === 'string' && typeof(value) === 'string') {
       this._get( data => {
         const categoryItems = data.filter( dbItem => 
-          value.toLowerCase() === dbItem[PARAM[prop]].toLowerCase());
-        if (categoryItems.length) {
+          value.toLowerCase() === dbItem[this._PARAM[prop]].toLowerCase());
+          console.log(Array.isArray(categoryItems));
           callback(categoryItems);
-        }
       });
     } else {
       throw new Error('"prop" and "value" must be of type String');
