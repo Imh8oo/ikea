@@ -55,10 +55,10 @@ export const activateCatalog = () => {
   //EVENT LISTENERS
   openCatalogBtn.addEventListener('click', openCatalog);
   closeCatalogBtn.addEventListener('click', closeCatalog);
-  catalogList.addEventListener('click', openSubCatalog);
   overlay.addEventListener('click', closeCatalog);
   document.addEventListener('keyup', escapeCatalog);
+  catalogList.addEventListener('click', openSubCatalog);
   closeSubCatalogBtn.addEventListener('click', closeSubCatalog);
   document.addEventListener('keyup', escapeCatalog);
-  console.log(document.location)
+  console.log(document.location);
 }
