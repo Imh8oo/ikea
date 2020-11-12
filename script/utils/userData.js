@@ -1,8 +1,4 @@
-import settings from './settings.js';
-/*const settings = {
-  itemIsNewStockCount: 7,
-  itemIDBodySimbolsNum: 3,
-};*/
+import settings from '../settings.js';
 
 const userData = {
   _wishlist: ['idd055', 'idd045', 'idd023', 'idd099', 'idd076', 'idd100'],
@@ -71,28 +67,35 @@ const userData = {
     }
   },
 
-  toggleIdList(id, arr) {
-    id = this.checkIdFormat(id);
-    if (arr.includes(id)) {
-      const index = arr.indexOf(id);
-      arr.splice(index, 1);
-    } else {
-      arr.push(id);
-    }
-  },
-
   get wishlist() {
     return this._wishlist;
   },
   set wishlist(id) {
-    this.toggleIdList(id, this._wishlist)
+    id = this.checkIdFormat(id);
+    if (this._wishlist.includes(id)) {
+      const index = this._wishlist.indexOf(id);
+      this._wishlist.splice(index, 1);
+    } else {
+      this._wishlist.push(id);
+    }
   },
 
   get cartlist() {
     return this._cartlist;
   },
   set cartlist(id) {
-    this.toggleIdList(id, this._cartlist)
+    id = this.checkIdFormat(id);
+
+    const itemIndex = this._cartlist.findIndex( item => item.id === id);
+
+    if (itemIndex >= 0) {
+      this._cartlist[itemIndex].count++;
+    } else {
+      this._cartlist.push({
+        id,
+        count: 1,
+      });
+    }
   },
 }
 

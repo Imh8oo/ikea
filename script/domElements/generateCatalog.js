@@ -1,5 +1,5 @@
-import GetData from './getData.js';
-import { activateCatalog } from './activateCatalog.js';
+import GetData from '../utils/getData.js';
+import { activateCatalog } from '../utils/activateCatalog.js';
 
 const generateCatalog = () => {
   const getData = new GetData();

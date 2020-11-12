@@ -1,4 +1,4 @@
-import GetData from './getData.js';
+import GetData from '../utils/getData.js';
 
 //generateSubCatalog is called in index.js
 export const generateSubCatalog = () => {

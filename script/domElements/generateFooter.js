@@ -1,4 +1,4 @@
-import GetData from './getData.js';
+import GetData from '../utils/getData.js';
 
 const generateFooter = () => {
   const getData = new GetData();

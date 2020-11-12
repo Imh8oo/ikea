@@ -1,6 +1,6 @@
-import GetData from './getData.js';
-import settings from './settings.js';
-import toggleWishlist from './toggleWishlist.js';
+import GetData from '../utils/getData.js';
+import settings from '../settings.js';
+import { itemPageUserDataBtns } from '../utils/userDataBtns.js';
 
 const generateItemPage = () => {
   const getData = new GetData();
@@ -17,7 +17,6 @@ const generateItemPage = () => {
       id,
       count
     }) => {
-      console.log(count);
       cardContainer.innerHTML = `
         <div class="breadcrumb">
           <nav role="navigation" aria-label="Breadcrumb" class="breadcrumb__nav">
@@ -76,7 +75,7 @@ const generateItemPage = () => {
         </div>
       `;
 
-      toggleWishlist();
+      itemPageUserDataBtns();
     });
   }
 }

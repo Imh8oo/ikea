@@ -1,4 +1,4 @@
-import { updateSubCatalogList } from './generateSubCatalog.js';
+import { updateSubCatalogList } from '../domElements/generateSubCatalog.js';
 
 //activateCatalog is called in generateCatalog.js
 export const activateCatalog = () => {

@@ -1,6 +1,7 @@
-import GetData from './getData.js';
-import settings from './settings.js';
-import userData from './userData.js';
+import GetData from '../utils/getData.js';
+import settings from '../settings.js';
+import userData from '../utils/userData.js';
+import { goodsPageUserDataBtns } from '../utils/userDataBtns.js';
 
 const generateGoodsPage = () => {
   const getData = new GetData();
@@ -33,6 +34,7 @@ const generateGoodsPage = () => {
         `;
         goodsList.append(item);
       });
+      goodsPageUserDataBtns();
     } else {
       goodsList.textContent = 'Ничего не найдено';
     }
