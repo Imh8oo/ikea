@@ -12,10 +12,12 @@ const toggleWishlist = (e) => {
 }
 
 const toggleCartlist = (e) => {
-  e.preventDefault();
   const target = e.target.closest('button');
-  const id = target.dataset.idd;
-  userData.cartlist = id;
+  if (target) {
+    e.preventDefault();
+    const id = target.dataset.idd;
+    userData.cartlist = id;
+  }
 }
 
 export const itemPageUserDataBtns = () => {
