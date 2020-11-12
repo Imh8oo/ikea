@@ -19,23 +19,11 @@ export const activateCatalog = () => {
   const openCatalog = () => {
     catalog.classList.add('open');
     overlay.classList.add('active');
-
-    catalogList.addEventListener('click', openSubCatalog);
-    closeCatalogBtn.addEventListener('click', closeCatalog);
-    overlay.addEventListener('click', closeCatalog);
-    document.addEventListener('keyup', escapeCatalog);
-    openCatalogBtn.removeEventListener('click', openCatalog);
   }
 
   const closeCatalog = () => {
     catalog.classList.remove('open');
     overlay.classList.remove('active');
-
-    catalogList.removeEventListener('click', openSubCatalog);
-    closeCatalogBtn.removeEventListener('click', closeCatalog);
-    overlay.removeEventListener('click', closeCatalog);
-    document.removeEventListener('keyup', escapeCatalog);
-    openCatalogBtn.addEventListener('click', openCatalog);
     closeSubCatalog();
   }
 
@@ -50,19 +38,12 @@ export const activateCatalog = () => {
     if (e.target.closest('li')) {
       updateSubCatalogList(subcatalogWrap, e.target.textContent);
       subCatalog.classList.add('subopen');
-
-      closeSubCatalogBtn.addEventListener('click', closeSubCatalog);
-      document.addEventListener('keyup', escapeSubCatalog);
-      document.removeEventListener('keyup', escapeCatalog);
     }
   }
 
   const closeSubCatalog = () => {
     subCatalog.classList.remove('subopen');
-
-    closeSubCatalogBtn.removeEventListener('click', closeSubCatalog);
     document.removeEventListener('keyup', escapeSubCatalog);
-    document.addEventListener('keyup', escapeCatalog);
   }
 
   const escapeSubCatalog = (e) => {
@@ -73,5 +54,11 @@ export const activateCatalog = () => {
 
   //EVENT LISTENERS
   openCatalogBtn.addEventListener('click', openCatalog);
+  closeCatalogBtn.addEventListener('click', closeCatalog);
+  catalogList.addEventListener('click', openSubCatalog);
+  overlay.addEventListener('click', closeCatalog);
+  document.addEventListener('keyup', escapeCatalog);
+  closeSubCatalogBtn.addEventListener('click', closeSubCatalog);
+  document.addEventListener('keyup', escapeCatalog);
   console.log(document.location)
 }
