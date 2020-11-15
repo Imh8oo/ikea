@@ -5,7 +5,7 @@ const toggleWishlist = (e) => {
   const id = target.dataset.idd;
   target.classList.toggle('contains-wishlist');
   storage.wishlist = id;
-}
+};
 
 const toggleCartlist = (e) => {
   const target = e.target.closest('button');
@@ -23,7 +23,7 @@ const toggleCartlist = (e) => {
       storage.increaseСartlistItemCount(id);
     }
   }
-}
+};
 
 export const itemPageBtns = (id) => {
   const addToWishlistBtn = document.querySelector('.btn-add-wishlist');
@@ -37,9 +37,9 @@ export const itemPageBtns = (id) => {
 
   addToWishlistBtn.addEventListener('click', toggleWishlist);
   addToCartBtn.addEventListener('click', toggleCartlist);
-}
+};
 
 export const goodsPageBtns = () => {
   const goodsList = document.querySelector('.goods-list');
   goodsList.addEventListener('click', toggleCartlist);
-}
+};

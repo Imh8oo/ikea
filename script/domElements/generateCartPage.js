@@ -5,8 +5,9 @@ import storage from '../storage.js';
 const generateCartPage = () => {
   const getData = new GetData();
   const cartList = document.querySelector('.cart-list'),
-        cartTotalPrice = document.querySelector('.cart-total-price');
-  const cartButtons = new CartButtons(cartList, cartTotalPrice);
+        cartTotalPrice = document.querySelector('.cart-total-price'),
+        cartForm = document.querySelector('.cart-form');
+  const cartButtons = new CartButtons(cartList, cartTotalPrice, cartForm);
   let totalPriceValue = 0;
 
   const renderItems = (items) => {
@@ -52,12 +53,11 @@ const generateCartPage = () => {
     } else {
       cartList.textContent = 'Корзина пуста';
     }
-  }
+  };
 
   if (location.pathname.includes('cart')) {
     getData.getCartItems(storage.cartlist, renderItems);
   }
-}
+};
 
 export default generateCartPage;
-

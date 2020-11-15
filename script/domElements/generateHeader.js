@@ -31,6 +31,6 @@ const generateHeader = () => {
   `;
 
   document.body.insertAdjacentHTML('afterbegin', headerHTML);
-}
+};
 
 export default generateHeader;

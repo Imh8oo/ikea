@@ -13,7 +13,7 @@ export const generateSubCatalog = () => {
     <div class="subcatalog-wrapper"></div>
   `;
   document.body.append(subCatalogNode);
-}
+};
 
 //updateSubCatalogList is called in activateCatalog.js => openSubCatalog
 export const updateSubCatalogList = (subCatalogInnerWrapper, category) => {
@@ -39,4 +39,4 @@ export const updateSubCatalogList = (subCatalogInnerWrapper, category) => {
   
     subCatalogInnerWrapper.insertAdjacentHTML('beforeend', subcategoriesHTML);
   });
-}
+};

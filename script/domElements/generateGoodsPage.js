@@ -38,7 +38,7 @@ const generateGoodsPage = () => {
     } else {
       goodsList.textContent = 'Ничего не найдено';
     }
-  }
+  };
 
   if (location.pathname.includes('goods') && location.search) {
     const searchStr = decodeURI(location.search),
@@ -56,6 +56,6 @@ const generateGoodsPage = () => {
       getData.getItemsByCategory(prop, searchValue, renderItems);
     }
   }
-}
+};
 
 export default generateGoodsPage;

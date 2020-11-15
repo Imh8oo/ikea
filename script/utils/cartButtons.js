@@ -1,11 +1,13 @@
 import storage from '../storage.js';
 import generateCartPage from '../domElements/generateCartPage.js';
+import postData from './postData.js';
 
 export default class CartButtons {
-  constructor(goodsWrapperDiv, totalPriceDiv) {
+  constructor(goodsWrapperDiv, totalPriceDiv, form) {
     this.goodsWrapperDiv = goodsWrapperDiv;
     this.totalPriceDiv = totalPriceDiv;
-  }
+    this.cartForm = form;
+  };
 
   updateStorage = (id, newCount, maxStockCount) => {
     const itemInCartCount = storage.getСartlistItemById(id).count;
@@ -20,7 +22,7 @@ export default class CartButtons {
       storage.reduceСartlistItemCount(id);
       return;
     }
-  }
+  };
 
   updateItemPrice = (target, count) => {
     const itemParentNode = target.closest('.product');
@@ -28,12 +30,13 @@ export default class CartButtons {
     const itemPrice = itemParentNode.querySelector('.product__price-regular').textContent.split('.-')[0];
     const itemTotalPrice = itemParentNode.querySelector('.product__total');
     itemTotalPrice.textContent = +itemPrice * count + '.-';
-  }
+  };
 
   updateTotalPrice = (id, target, newCount) => {
     const prevTotalPrice = this.totalPriceDiv.textContent.split('.-')[0],
           itemInCartCount = storage.getСartlistItemById(id).count,
           itemParentNode = target.closest('.product'),
+          //И вот тут та же хрень
           itemPrice = itemParentNode.querySelector('.product__price-regular').textContent.split('.-')[0];
     let newTotalPrice = 0;
     if (newCount > itemInCartCount) {
@@ -42,7 +45,7 @@ export default class CartButtons {
       newTotalPrice = +prevTotalPrice - +itemPrice;
     }
     this.totalPriceDiv.textContent = +newTotalPrice + '.-';
-  }
+  };
 
   onInputAmountChanged = (e) => {
     const target = e.target.closest('input');
@@ -51,7 +54,7 @@ export default class CartButtons {
     this.updateStorage(id, newCountValue, target.dataset.count);
     this.updateItemPrice(target, newCountValue);
     this.updateTotalPrice(id, target, newCountValue);
-  }
+  };
 
   removeItemFromCart = (e) => {
     const target = e.target.closest('button');
@@ -62,12 +65,20 @@ export default class CartButtons {
       this.goodsWrapperDiv.innerHTML = '';
       this.goodsWrapperDiv.removeEventListener('input', this.onInputAmountChanged);
       this.goodsWrapperDiv.removeEventListener('click', this.removeItemFromCart);
+      this.cartForm.removeEventListener('submit', this.placeOrder);
       generateCartPage();
     }
+  };
+
+  placeOrder = (e) => {
+    e.preventDefault();
+    postData.sendCartItems(storage.cartlist);
   }
   
+  //These listeners have to be removed in the removeItemFromCart method due to re-rendering cart page
   init = () => {
     this.goodsWrapperDiv.addEventListener('input', this.onInputAmountChanged);
     this.goodsWrapperDiv.addEventListener('click', this.removeItemFromCart);
-  }
+    this.cartForm.addEventListener('submit', this.placeOrder);
+  };
 }

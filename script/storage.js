@@ -57,7 +57,6 @@ const storage = {
   //WISHLIST FUNCTIONS
   get wishlist() {
     return this._wishlist;
-    
   },
 
   set wishlist(id) {
@@ -103,7 +102,6 @@ const storage = {
 
   reduceСartlistItemCount(id) {
     id = this.checkIdFormat(id);
-    
 
     if (this._cartlist[itemIndex].count > 1) {
       this._cartlist[itemIndex].count--;
@@ -120,6 +118,6 @@ const storage = {
     this._cartlist.splice(itemIndex, 1);
     localStorage.setItem('cartlist', JSON.stringify(this._cartlist));
   },
-}
+};
 
 export default storage;

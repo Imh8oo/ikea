@@ -78,6 +78,6 @@ const generateItemPage = () => {
       itemPageBtns(id);
     });
   }
-}
+};
 
 export default generateItemPage;
