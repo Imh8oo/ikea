@@ -1,5 +1,5 @@
 import GetData from '../utils/getData.js';
-import { activateCatalog } from '../utils/activateCatalog.js';
+import { сatalog } from '../utils/сatalog.js';
 
 const generateCatalog = () => {
   const getData = new GetData();
@@ -27,7 +27,7 @@ const generateCatalog = () => {
     `;
 
     document.body.insertAdjacentHTML('beforeend', catalogHTML);
-    activateCatalog();
+    сatalog();
   });
 }
 

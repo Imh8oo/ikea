@@ -1,7 +1,7 @@
 import GetData from '../utils/getData.js';
 import settings from '../settings.js';
-import userData from '../utils/userData.js';
-import { goodsPageUserDataBtns } from '../utils/userDataBtns.js';
+import storage from '../storage.js';
+import { goodsPageBtns } from '../utils/goodsButtons.js';
 
 const generateGoodsPage = () => {
   const getData = new GetData();
@@ -27,14 +27,14 @@ const generateGoodsPage = () => {
                 <span class="goods-item__price-value">${price}</span>
                 <span class="goods-item__currency"> ₽</span>
               </p>
-              ${ count ? '<button class="btn btn-add-card" aria-label="Добравить в корзину" data-idd=' + id + '></button>'
-                : '<button class="btn btn-add-card__disabled" disabled aria-label="Нет в наличии" data-idd=' + id + '></button>'}
+              ${ count ? '<button class="btn btn-add-card" aria-label="Добравить в корзину" data-count=' + count + ' data-idd=' + id + '></button>'
+                : '<button class="btn btn-add-card__disabled" disabled aria-label="Нет в наличии" data-count=' + count + ' data-idd=' + id + '></button>'}
             </article>
           </a>
         `;
         goodsList.append(item);
       });
-      goodsPageUserDataBtns();
+      goodsPageBtns();
     } else {
       goodsList.textContent = 'Ничего не найдено';
     }
@@ -50,7 +50,7 @@ const generateGoodsPage = () => {
       getData.getItemsByName(searchValue, renderItems);
     } else if (prop === 'wishlist') {
       mainHeader.textContent = 'Список желаний';
-      getData.getWishlistItemsById(userData.wishlist, renderItems);
+      getData.getWishlistItemsById(storage.wishlist, renderItems);
     } else if (prop === 'cat' || prop === 'subcat') {
       mainHeader.textContent = searchValue;
       getData.getItemsByCategory(prop, searchValue, renderItems);

@@ -1,7 +1,7 @@
 import { updateSubCatalogList } from '../domElements/generateSubCatalog.js';
 
-//activateCatalog is called in generateCatalog.js
-export const activateCatalog = () => {
+//сatalog is called in generateCatalog.js
+export const сatalog = () => {
   const openCatalogBtn = document.querySelector('.btn-burger'),
       catalog = document.querySelector('.catalog'),
       closeCatalogBtn = document.querySelector('.btn-close'),

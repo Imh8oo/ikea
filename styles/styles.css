@@ -849,6 +849,15 @@ footer {
 	margin-left: .5rem;
 }
 
+.product-controls__input {
+	height: 40px;
+	width: 60px;
+	text-align: center;
+	font-weight: 400;
+	font-size: 1.06rem;
+	line-height: 1.2;
+}
+
 .cart-header {
 	margin-bottom: 3rem;
 }

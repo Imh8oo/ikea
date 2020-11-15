@@ -1,21 +1,8 @@
-import settings from '../settings.js';
+import settings from './settings.js';
 
-const userData = {
-  _wishlist: ['idd055', 'idd045', 'idd023', 'idd099', 'idd076', 'idd100'],
-  _cartlist: [
-    {
-      id: 'idd027',
-      count: 1,
-    },
-    {
-      id: 'idd014',
-      count: 1,
-    },
-    {
-      id: 'idd082',
-      count: 2,
-    },
-  ],
+const storage = {
+  _wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],
+  _cartlist: JSON.parse(localStorage.getItem('cartlist')) || [],
 
   checkBitDepth (num) {
     switch(true) {
@@ -67,36 +54,72 @@ const userData = {
     }
   },
 
+  //WISHLIST FUNCTIONS
   get wishlist() {
     return this._wishlist;
+    
   },
+
   set wishlist(id) {
     id = this.checkIdFormat(id);
     if (this._wishlist.includes(id)) {
       const index = this._wishlist.indexOf(id);
       this._wishlist.splice(index, 1);
+      localStorage.setItem('wishlist', JSON.stringify(this._wishlist));
     } else {
       this._wishlist.push(id);
+      localStorage.setItem('wishlist', JSON.stringify(this._wishlist));
     }
   },
 
+  //CART FUNCTIONS
   get cartlist() {
     return this._cartlist;
   },
-  set cartlist(id) {
-    id = this.checkIdFormat(id);
 
-    const itemIndex = this._cartlist.findIndex( item => item.id === id);
+  getСartlistItemIndex(id) {
+    return this._cartlist.findIndex( item => item.id === id);
+  },
+
+  getСartlistItemById(id) {
+    return this._cartlist.find( item => item.id === id);
+  },
+
+  increaseСartlistItemCount(id) {
+    id = this.checkIdFormat(id);
+    const itemIndex = this.getСartlistItemIndex(id);
 
     if (itemIndex >= 0) {
       this._cartlist[itemIndex].count++;
+      localStorage.setItem('cartlist', JSON.stringify(this._cartlist));
     } else {
       this._cartlist.push({
         id,
         count: 1,
       });
+      localStorage.setItem('cartlist', JSON.stringify(this._cartlist));
     }
+  },
+
+  reduceСartlistItemCount(id) {
+    id = this.checkIdFormat(id);
+    
+
+    if (this._cartlist[itemIndex].count > 1) {
+      this._cartlist[itemIndex].count--;
+      localStorage.setItem('cartlist', JSON.stringify(this._cartlist));
+    } else {
+      this._cartlist.splice(itemIndex, 1);
+      localStorage.setItem('cartlist', JSON.stringify(this._cartlist));
+    }
+  },
+
+  removeItemFromCartlist(id) {
+    id = this.checkIdFormat(id);
+    const itemIndex = this.getСartlistItemIndex(id);
+    this._cartlist.splice(itemIndex, 1);
+    localStorage.setItem('cartlist', JSON.stringify(this._cartlist));
   },
 }
 
-export default userData;
+export default storage;

@@ -65,8 +65,13 @@ export default class GetData {
   getCartItems = (cartItemsIds, callback) => {
     if (Array.isArray(cartItemsIds)) {
       this._get( data => {
-        const cartItems = data.filter( dbItem => cartItemsIds.some( obj => obj.id === dbItem.id) );
-        console.log(Array.isArray(cartItems));
+        const cartItems = data.filter( dbItem => cartItemsIds.some( obj => {
+          if (obj.id === dbItem.id) {
+            const amount = (obj.count <= dbItem.count) ? obj.count : dbItem.count;
+            dbItem.amount = amount;
+            return obj;
+          }
+        }));
         callback(cartItems);
       });
     } else {
