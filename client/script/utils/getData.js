@@ -1,7 +1,7 @@
 export default class GetData {
   constructor() {
     this.URL = 'database/dataBase.json';
-    this.servurl = 'http://127.0.0.1:3000/card';
+    this.servurl = 'http://127.0.0.1:3000/';
   };
 
   _PARAM = {
@@ -40,15 +40,7 @@ export default class GetData {
     }
   };
 
-  getItemsByCategory = async (prop, value, callback) => {
-    console.log('value: ', value);
-    console.log('prop: ', prop);
-    this._getRequest(this.servurl + `?${prop}=${value}`)
-    .then( data => console.log(data))
-    .catch( err => console.error(err));
-  };
-
-  getItemsByName = (itemName, callback) => {
+  /*getItemsByName = (itemName, callback) => {
     if (typeof(itemName) === 'string') {
       this._get( data => {
         const items = data.filter( dbItem => {
@@ -65,6 +57,11 @@ export default class GetData {
     } else {
       throw new Error('The "itemName" must be a string');
     }
+  };*/
+  getItemsByName = (itemName, callback) => {
+    this._getRequest(this.servurl + `?s=${itemName}`)
+    .then( data => console.log(data))
+    .catch( err => console.error(err));
   };
 
   getWishlistItemsById = (wishlistIds, callback) => {
@@ -108,6 +105,11 @@ export default class GetData {
       throw new Error('"prop" and "value" must be of type String');
     }
   };*/
+  getItemsByCategory = async (prop, value, callback) => {
+    this._getRequest(this.servurl + `?${prop}=${value}`)
+    .then( data => console.log(data))
+    .catch( err => console.error(err));
+  };
 
   getAllCategories = (callback) => {
     this._get( data => {
