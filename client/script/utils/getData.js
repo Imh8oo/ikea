@@ -1,6 +1,7 @@
 export default class GetData {
   constructor() {
     this.URL = 'database/dataBase.json';
+    this.servurl = 'http://127.0.0.1:3000/card';
   };
 
   _PARAM = {
@@ -37,6 +38,14 @@ export default class GetData {
     } else {
       throw new Error('The "itemId" must be a string');
     }
+  };
+
+  getItemsByCategory = async (prop, value, callback) => {
+    console.log('value: ', value);
+    console.log('prop: ', prop);
+    this._getRequest(this.servurl + `?${prop}=${value}`)
+    .then( data => console.log(data))
+    .catch( err => console.error(err));
   };
 
   getItemsByName = (itemName, callback) => {
@@ -87,7 +96,7 @@ export default class GetData {
     }
   };
 
-  getItemsByCategory = (prop, value, callback) => {
+  /*getItemsByCategory = (prop, value, callback) => {
     if (typeof(prop) === 'string' && typeof(value) === 'string') {
       this._get( data => {
         const categoryItems = data.filter( dbItem => 
@@ -98,7 +107,7 @@ export default class GetData {
     } else {
       throw new Error('"prop" and "value" must be of type String');
     }
-  };
+  };*/
 
   getAllCategories = (callback) => {
     this._get( data => {
