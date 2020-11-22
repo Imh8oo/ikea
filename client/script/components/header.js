@@ -1,5 +1,5 @@
-const generateHeader = () => {
-  const headerHTML = `
+const headerHTML = () => {
+  return `
     <header>
       <div class="container">
         <div class="header">
@@ -29,8 +29,6 @@ const generateHeader = () => {
       </div>
     </header>
   `;
-
-  document.body.insertAdjacentHTML('afterbegin', headerHTML);
 };
 
-export default generateHeader;
+export default headerHTML;

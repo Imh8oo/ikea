@@ -23,7 +23,9 @@ const goodsItem = new Schema({
     type: Number,
     required: true,
   },
-});
+},
+{ collation: { locale: 'ru', strength: 1 } }
+);
 
 const itemModel = model('goods', goodsItem);
 
