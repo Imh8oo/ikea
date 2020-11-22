@@ -1,11 +1,19 @@
 import GetData from '../utils/getData.js';
+const getData = new GetData();
 
-const generateFooter = () => {
-  const getData = new GetData();
-  
-  getData.getAllCategories( categories => {
+export default class Footer {
+  state = {
+    сategories: [],
+  };
+
+  loadFooterData = async () => {
+    this.state.categories = await getData.getAllCategories();
+    this.render();
+  };
+
+  render() {
     let categoriesList = '';
-    categories.forEach( category => {
+    this.state.categories.forEach( category => {
       categoriesList += `<li class="footer-list"><a href="goods.html?cat=${category}">${category}</a></li>`;
     });
 
@@ -46,7 +54,6 @@ const generateFooter = () => {
     `;
 
     document.body.insertAdjacentHTML('beforeend', footerHTML);
-  });
+  };
 };
 
-export default generateFooter;

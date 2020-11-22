@@ -1,7 +1,8 @@
-import { updateSubCatalogList } from '../domElements/generateSubCatalog.js';
+import { UpdateSubcatalogList } from '../components/subcatalog.js';
+const updateSubcatalog = new UpdateSubcatalogList();
+updateSubcatalog.loadSubcatalogData();
 
-//сatalog is called in generateCatalog.js
-export const сatalog = () => {
+export const catalogUtils = () => {
   const openCatalogBtn = document.querySelector('.btn-burger'),
         catalog = document.querySelector('.catalog'),
         closeCatalogBtn = document.querySelector('.btn-close'),
@@ -36,7 +37,7 @@ export const сatalog = () => {
   const openSubCatalog = (e) => {
     e.preventDefault();
     if (e.target.closest('li')) {
-      updateSubCatalogList(subcatalogWrap, e.target.textContent);
+      updateSubcatalog.renderSubcatalog(e.target.textContent, subcatalogWrap);
       subCatalog.classList.add('subopen');
     }
   };

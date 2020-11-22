@@ -1,12 +1,22 @@
 import GetData from '../utils/getData.js';
-import { сatalog } from '../utils/сatalog.js';
+const getData = new GetData();
+import { catalogUtils } from '../utils/сatalog.js';
 
-const generateCatalog = () => {
-  const getData = new GetData();
+export default class Catalog {
+  loadCatalogData = () => {
+    getData.getAllCategories() //database query
+    .then(this.onCatalogLoaded)
+    .catch(err => console.log(err));
+  };
 
-  getData.getAllCategories( categories => {
+  onCatalogLoaded = (data) => {
+    this.render(data); //render catalog which is not shown on the page yet
+    catalogUtils(); //catalog eventlisteners etc.
+  }
+
+  render(data) {
     let categoriesList = '';
-    categories.forEach( category => {
+    data.forEach( category => {
       categoriesList += `<li class="catalog-list__item active">
                           <a href="goods.html?cat=${category}">${category}</a>
                         </li>`;
@@ -27,8 +37,5 @@ const generateCatalog = () => {
     `;
 
     document.body.insertAdjacentHTML('beforeend', catalogHTML);
-    сatalog();
-  });
+  };
 };
-
-export default generateCatalog;

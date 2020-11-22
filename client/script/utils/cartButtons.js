@@ -1,5 +1,5 @@
 import storage from '../storage.js';
-import generateCartPage from '../domElements/generateCartPage.js';
+//import generateCartPage from '../components/generateCartPage.js';
 import postData from './postData.js';
 
 export default class CartButtons {
@@ -66,7 +66,7 @@ export default class CartButtons {
       this.goodsWrapperDiv.removeEventListener('input', this.onInputAmountChanged);
       this.goodsWrapperDiv.removeEventListener('click', this.removeItemFromCart);
       this.cartForm.removeEventListener('submit', this.placeOrder);
-      generateCartPage();
+      //generateCartPage();
     }
   };
 
