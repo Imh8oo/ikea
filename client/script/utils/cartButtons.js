@@ -72,7 +72,15 @@ export default class CartButtons {
 
   placeOrder = (e) => {
     e.preventDefault();
-    postData.sendCartItems(storage.cartlist);
+    const formData = new FormData(this.cartForm);
+    const orderData = {};   
+    for ( const [key, value] of formData) {
+      orderData[key] = value;
+    }
+    orderData.order = storage.cartlist;
+    postData.sendCartItems(JSON.stringify(orderData), () => this.cartForm.reset());
+    
+    //postData.sendCartItems();
   }
   
   //These listeners have to be removed in the removeItemFromCart method due to re-rendering cart page
